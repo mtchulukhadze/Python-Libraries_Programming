@@ -1,0 +1,66 @@
+import tkinter as tk
+from tkinter import filedialog
+from openpyxl import load_workbook
+import PySimpleGUI as sg
+import pandas as pd
+import openpyxl
+import os
+
+sg.theme('DarkTeal9')
+
+layout = [
+    [sg.Text('First Name'), sg.Push(), sg.Input(key='first_name')],
+    [sg.Text('Last Name'), sg.Push(), sg.Input(key='last_name')],
+    [sg.Text('Amount'), sg.Push(), sg.Input(key='amount')],
+    [sg.Checkbox('Male', key='male_checkbox'), sg.Checkbox('Female', key='female_checkbox')],
+    [sg.Button('Submit'), sg.Button('Exit')]
+]
+
+window = sg.Window("Data Entry", layout, element_justification='center')
+
+file_path = r"C:\Users\user\OneDrive\Desktop\Data_Entry2.xlsx"
+
+if not os.path.exists(file_path):
+    wb = openpyxl.Workbook()
+    wb.save(file_path)
+
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED or event == 'Exit':
+        break
+    if event == 'Submit':
+        try:
+            first_name = values['first_name']
+            last_name = values['last_name']
+            amount = values['amount']
+            gender = 'Male' if values['male_checkbox'] else 'Female' if values['female_checkbox'] else ''
+
+            data = {'First Name': [first_name], 'Last Name': [last_name], 'Gender': [gender], 'Amount': [amount]}
+            df = pd.DataFrame(data)
+
+            wb = load_workbook(file_path)
+            if 'Sheet1' in wb.sheetnames:
+                sheet = wb['Sheet1']
+            else:
+                sheet = wb.active
+                sheet.title = 'Sheet1'
+                sheet.append(['First Name', 'Last Name', 'Gender', 'Amount'])
+
+            #ID = len(sheet['A']) + 1
+            data = [first_name, last_name, gender, amount]
+            sheet.append(data)
+
+            wb.save(file_path)
+
+            sg.popup('Successfully saved Data')
+        except PermissionError:
+            sg.popup("You can't access the file. Please close it.")
+
+window.close()
+
+import matplotlib.pyplot as plt
+import pandas as pd
+df = pd.read_excel(r"C:\Users\user\OneDrive\Desktop\Data_Entry2.xlsx")
+print(df)
+
+
