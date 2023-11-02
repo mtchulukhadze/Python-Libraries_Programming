@@ -1,0 +1,19 @@
+import openai
+
+openai.api_key = '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'
+
+def get_gpt_response(promt, max_tokens=20):
+    prompt = f"answer the following questions: {promt}"
+    response = openai.Completion.create(
+        engine='davinci',
+        prompt=prompt,
+        max_tokens=2,
+        n=1,
+        stop='\n',
+        temperature=0.2
+    )
+    return response.choices[0].text.strip()
+
+prompt1 = "what is a def in python"
+response = get_gpt_response(prompt1)
+print(response)
