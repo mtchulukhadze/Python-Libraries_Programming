@@ -1,0 +1,35 @@
+class bank_account():
+    def __init__(self):
+        self.amount = 0
+
+    def deposit(self, Amount):
+        self.amount += Amount
+
+    def withdraw(self, Amount):
+        self.amount - Amount
+        print('balance\n')
+
+    def display(self):
+        print('balance is:', self.amount)
+    
+    def close(self):
+        self.amount = 0
+
+a=bank_account()
+for i in range(0, 50):
+    print('1.deposit 2.withdraw 3.Display 4.exit')
+    p = input('enter your choice')
+    if p == '1':
+        Amount = int(input('enter amount'))
+        a.deposit(Amount)
+    elif p =='2':
+        Amount = int(input('withdraw amount'))
+        a.withdraw(Amount)
+    elif p == '3':
+        a.display()
+    elif p == '4':
+        a.close()
+    else:
+        print('error')
+
+
