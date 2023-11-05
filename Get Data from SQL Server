@@ -1,0 +1,69 @@
+import pyodbc
+import pandas as pd
+
+user = 'DESKTOP-3QJN7S3'+"\)" + "user"  # sql server user name
+
+user_rep = user.replace(")" , "")
+
+conn = pyodbc.connect("Driver={SQL Server};"
+                      "Server=DESKTOP-3QJN7S3;" # Server name
+                      f"uid={user_rep};"
+                      "BANK_MANAGEMENT_SYSTEM;" # selected database
+                      "Trusted_Connection=yes;")
+
+user = 'DESKTOP-3QJN7S3'+"\)" + "user"  # sql server user name
+
+
+def openaccount():
+    name = input('enter name')
+    acc_no = input('enter account number')
+    dob = input('enter dob')
+    address = input('enter address')
+    contactn = input('contact number')
+    opening_bal = int(input('enter opening balance'))
+    data1 = (name, acc_no, dob, address, contactn, opening_bal)
+    sql1 = ('insert into BANK_MANAGEMENT_SYSTEM.dbo.accoount_table values (?, ?, ?, ?, ?, ?)')
+    conn.execute(sql1, data1)
+    conn.commit()
+    print('Data eneterd successfully.')
+
+def depositeamount():
+   amount = input('enter amount  to deposit')
+   acc_no = input('which account tou want to deposit')
+   acc_add_amount = 'select balance from BANK_MANAGEMENT_SYSTEM.dbo.amount where acc_no ?'
+   data = (acc_no, )
+   conn.execute(acc_no, data) 
+   result = conn.fetchone()
+   t = result[0] + amount
+   sql = ('update amount set balance = ? where acc_no = ?', acc_add_amount)
+   d = (t, acc_no)
+   conn.execute(sql, d)
+   conn.commit()
+
+
+def main():
+    print('''
+        1. open account
+        2. deposite amount
+        3. withdraw amount
+        4. balance 
+        5. customer details
+        6. close account
+    ''')
+    choice  = input('enter the task')
+    if choice == '1':
+       openaccount()
+    elif choice == '2':
+       depositeamount()
+    elif choice == '3':
+       withdrawamount()
+    elif choice == '4':
+       balance()
+    elif choice == '5':
+       customerdetails()
+    else:
+       print('error')
+if __name__ == '__main__':
+   main()
+
+print(pd.read_sql_query('''select * from BANK_MANAGEMENT_SYSTEM.dbo.accoount_table''', conn))
