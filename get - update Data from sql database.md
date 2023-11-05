@@ -1,12 +1,12 @@
 import pyodbc
 import pandas as pd
 
-user = 'DESKTOP-3QJN7S3'+"\)" + "user" 
+user = 'enter database'+"\)" + "user" 
 
 user_rep = user.replace(")" , "")
 
 conn = pyodbc.connect("Driver={SQL Server};"
-                      "Server=DESKTOP-3QJN7S3;" 
+                      "Server=enter database;" 
                       f"uid={user_rep};"
                       "Database = BANK_MANAGEMENT_SYSTEM;" 
                       "Trusted_Connection=yes;")
