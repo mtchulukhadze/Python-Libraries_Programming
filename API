@@ -27,7 +27,7 @@ Image.open(path)
 
 
 
-
+# get data from website and insert in Database
 
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
@@ -61,3 +61,36 @@ import pandas as pd
 pd.set_option('display.max_columns', None)
 
 pd.json_normalize(data['data'])
+
+data2 = data[['name', 'symbol', 'slug']].head()
+
+import pyodbc
+
+user = 'DESKTOP-3QJN7S3' + "\)" + "user"  # sql server user name
+user_rep = user.replace(")", "")
+
+conn = pyodbc.connect("Driver={SQL Server};"
+                          "Server=DESKTOP-3QJN7S3;"  # Server name
+                          f"uid={user_rep}"
+                          "Database=Data_Model;"  # selected database
+                          "Trusted_Connection=yes;")
+
+cursor = conn.cursor()
+
+try:
+    conn.execute('''create table Data_Model.dbo.coin_market_data (name varchar(132), symbol varchar(32), slug varchar(32))''')
+    conn.commit()
+except Exception as e:
+    conn.rollback()
+    print(f'error{e}')
+
+for index, row in data2.iterrows():
+    try:
+        conn.execute(
+            '''insert into Data_Model.dbo.coin_market_data (name, symbol, slug) values (?, ?, ?) ''', 
+            row['name'], row['symbol'], row['slug']
+        )
+        conn.commit()
+    except Exception as e:
+        conn.rollback
+        print(f'error{e}')
