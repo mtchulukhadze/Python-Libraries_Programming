@@ -36,3 +36,12 @@ for user in list:
 
 for user in some_list:
     print(user.get_picture())
+
+def Users():
+    users = []
+    
+    for user in r.generate_users(10):
+        users.append({"name": user.get_full_name(), "phone": user.get_phone()})
+
+    return pd.DataFrame(users)
+Users()
