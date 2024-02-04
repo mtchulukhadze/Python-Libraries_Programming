@@ -33,3 +33,6 @@ list = r.generate_users(10)
 
 for user in list:
     print(user.get_full_name())
+
+for user in some_list:
+    print(user.get_picture())
