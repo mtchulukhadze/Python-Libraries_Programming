@@ -41,7 +41,7 @@ def Users():
     users = []
     
     for user in r.generate_users(10):
-        users.append({"name": user.get_full_name(), "phone": user.get_phone()})
+        users.append({"name": user.get_full_name(), "phone": user.get_phone(), "photo": user.get_picture()})
 
     return pd.DataFrame(users)
 Users()
