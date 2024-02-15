@@ -1,6 +1,8 @@
+
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
+import pyodbc
 
 url = 'https://web.archive.org/web/20230902185655/https://en.everybodywiki.com/100_Most_Highly-Ranked_Films'
 db_name = 'Movies.db'
@@ -30,3 +32,45 @@ for row in rows:
             count +=1
     else:
         break
+
+
+df['IMDb_Top'] = df['IMDb_Top'].replace('unranked', 0)
+
+
+user = 'DESKTOP-3QJN7S3' + "\)" + "user"  # sql server user name
+user_rep = user.replace(")", "")
+
+conn = pyodbc.connect("Driver={SQL Server};"
+                          "Server=DESKTOP-3QJN7S3;"  # Server name
+                          f"uid={user_rep}"
+                          "Database=Data_Model;"  # selected database
+                          "Trusted_Connection=yes;")
+
+cursor = conn.cursor()
+
+try:
+    conn.execute('''drop table if exists Data_Model.dbo.MovieData''')
+    conn.commit()
+except Exception as e:
+    conn.rollback()
+    print(f'error{e}')
+
+try:
+    conn.execute('''create table Data_Model.dbo.MovieData (Avg_Rank int, Film varchar(132), Year int, IMDB_Top int)''')
+    conn.commit()
+except Exception as e:
+    conn.rollback()
+    print(f'Error{e}')
+
+for index, row in df.iterrows():
+    try:
+        conn.execute('''insert into Data_Model.dbo.MovieData (Avg_Rank, Film, Year, IMDB_Top) values (?, ?, ?, ?)''',
+                        row['Average Rank'], row['Film'], row['Year'], row['IMDb_Top']
+                    )
+        conn.commit()
+    except Exception as e:
+        conn.rollback()
+        print(f'Error{e}')
+
+data = pd.read_sql_query('''select * from Data_Model.dbo.MovieData''', conn)
+print(data)
