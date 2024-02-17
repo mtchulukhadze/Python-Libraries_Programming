@@ -94,3 +94,96 @@ for index, row in data2.iterrows():
     except Exception as e:
         conn.rollback
         print(f'error{e}')
+
+
+
+
+
+
+import requests
+import pandas as pd
+from bs4 import BeautifulSoup
+import pyodbc
+
+url2 = 'https://web.archive.org/web/20230908091635%20/https://en.wikipedia.org/wiki/List_of_largest_banks'
+response = requests.get(url2)
+
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    table = soup.find('table', {'class': 'wikitable'})
+
+    data = []
+    for row in table.find_all('tr')[1:]:
+        columns = row.find_all(['th', 'td'])
+        country = columns[1].text.strip()
+        gdp = columns[2].text.strip()
+
+        data.append({'BankName': country, 'Assets': gdp})
+
+    df = pd.DataFrame(data)
+    print(df)
+
+else:
+    print(f"Failed to retrieve data. Status code: {response.status_code}")
+
+
+
+url2 = 'https://web.archive.org/web/20230908091635%20/https://en.wikipedia.org/wiki/List_of_largest_banks'
+
+response = requests.get(url2)
+
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    # Find the section with the title 'By market capitalization'
+    section_title = soup.find('span', {'id': 'By_market_capitalization'})
+
+    # Navigate to the next section (assuming the table is in the next section)
+    next_section = section_title.find_next('span', {'class': 'mw-headline'})
+    table = next_section.find_next('table', {'class': 'wikitable'})
+
+    # Extract data from the table
+    data = []
+    for row in table.find_all('tr')[1:]:
+        columns = row.find_all(['th', 'td'])
+        rank = columns[0].text.strip()
+        bank_name = columns[1].text.strip()
+        total_assets = columns[2].text.strip()
+
+        data.append({'Rank': rank, 'BankName': bank_name, 'TotalAssets': total_assets})
+
+    # Create a DataFrame from the extracted data
+    df = pd.DataFrame(data)
+    print(df)
+
+else:
+    print(f"Failed to retrieve data. Status code: {response.status_code}")
+
+
+
+user = 'DESKTOP-3QJN7S3' + "\)" + "user"  # sql server user name
+user_rep = user.replace(")", "")
+
+conn = pyodbc.connect("Driver={SQL Server};"
+                          "Server=DESKTOP-3QJN7S3;"  # Server name
+                          f"uid={user_rep}"
+                          "Database=Data_Model;"  # selected database
+                          "Trusted_Connection=yes;")
+cursor = conn.cursor()
+
+try:
+    conn.execute('''create table Data_Model.dbo.Bank_cap (BankName varchar(132), MarketCap nvarchar(132))''')
+    conn.commit()
+except Exception as e:
+    conn.rollback()
+    print(f'error{e}')
+
+for index, row in df.iterrows():
+    try:
+        conn.execute('''insert into Data_Model.dbo.Bank_cap (BankName, MarketCap) values (?, ?)''',
+                     row['BankName'], row['MarketCap'])
+        conn.commit()
+    except Exception as e:
+        conn.rollback()
+        print(f'error{e}')
