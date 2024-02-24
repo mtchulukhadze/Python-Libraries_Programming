@@ -1,0 +1,21 @@
+import requests
+from bs4 import BeautifulSoup
+
+url = 'https://web.archive.org/web/20230902185655/https://en.everybodywiki.com/100_Most_Highly-Ranked_Films'
+html_page = requests.get(url).text
+data = BeautifulSoup(html_page, 'html.parser')
+print(data)
+
+url = 'https://books.toscrape.com/'
+html_page = requests.get(url).text
+df = BeautifulSoup(html_page, 'html.parser')
+
+df2 = df.find('ol')
+
+df3 = df2.find_all('article', class_='product_pod')
+df3
+
+for df in df3:
+    img = df.find('img')
+    title = img.attrs['alt']
+    print(title)
