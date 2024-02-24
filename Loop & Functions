@@ -1,0 +1,24 @@
+def view():
+    with open('scratch_1.txt') as f:
+        for line in f.readlines():
+            print(line)
+
+def add():
+    name = input('Account Name: ')
+    pdw = input("Password: ")
+
+    with open('scratch_1.txt', 'a') as f:
+        f.write(name + ' ' + pdw + "\n")
+
+while True:
+    mode = input('would you like to add new password or view existing (view / add), q to quit')
+    if mode == 'q':
+        break
+
+    if mode == 'v':
+        view()
+    elif mode == 'a':
+        add()
+    else:
+        print('invalid mode.')
+        continue
