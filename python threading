@@ -1,0 +1,56 @@
+
+import threading
+import time
+
+a = 0
+exit_event = threading.Event()
+
+class Student(threading.Thread):
+    def __init__(self, name, standart, caunter):
+        threading.Thread.__init__(self)
+        self.name = name
+        self.stadart = standart
+        # self.marks = amarks
+        self.caunter = caunter
+
+    def run(self):
+        print("name is " + self.name)
+        present_time(self.name, self.caunter, 6)
+        print("standart is " + self.stadart)
+
+def present_time(thread_Name, dealy_time, counter):
+    while counter > a and not exit_event.is_set():
+        # if a:
+        #     thread_Name.exit()
+        time.sleep(dealy_time)
+        print("%s: %s" % (thread_Name, time.ctime(time.time())))
+        acounter = -0.5
+
+s1 = Student("a", 10, 23)
+print(s1.start())
+
+# Section 6: v27
+
+def square(a):
+    result = a * a
+    print(format(result))
+
+print(square(5))
+
+def cube(a):
+    result = a * a * a
+    print(format(result))
+
+print(cube(2))
+
+if __name__ == "__main__":
+    a1 = threading.Thread(target=square, args=(2,))
+    a2 = threading.Thread(target=cube, args=(2,))
+
+    a1.start() # staring my threading for a1
+    time.sleep(1)
+    a2.start() # staring my threading for a2
+
+    a1.join() # waiting till the threading 1 completed
+    a2.join() # witing till the thread 2 executed
+
