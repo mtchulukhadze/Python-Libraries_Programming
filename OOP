@@ -1,0 +1,56 @@
+
+import queue
+import time
+import threading
+
+a = 0
+
+class one(threading.Thread):
+    def __init__(self, id, name, b):
+        threading.Thread.__init__(self)
+        self.id = id
+        self.name = name
+        self.b = b
+
+    def run(self):
+        print(f"starting: {self.name}")
+        details(self.name, self.b)
+        print(f"Exit {self.name}")
+
+def details(threadName, b):
+    while not a:
+        queue_Lock.acquire()
+        if not queue_work.empty():
+            data = b.get()
+            queue_Lock.release()
+            print(threadName, data)
+        else:
+            queue_Lock.release()
+            time.sleep(0.5)
+
+thread_list = ['a', 'b', 'c']
+name = ['one', 'two', 'three']
+queue_Lock = threading.Lock()
+queue_work = queue.Queue(10)
+threads = []
+id = 1
+
+for tname in thread_list:
+    thread = one(id, tname, queue_work)
+    thread.start()
+    threads.append(thread)
+    id += 1
+
+queue_Lock.acquire()
+for word in name:
+    queue_work.put(word)
+queue_Lock.release()
+
+while not queue_work.empty():
+    pass
+
+a = 1
+
+for t in threads:
+    t.join()
+print("Exit")
