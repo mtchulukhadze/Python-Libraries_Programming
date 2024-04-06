@@ -1,0 +1,21 @@
+path = {
+    "A": ["B"],
+    "B": ["C", "D"],
+    "C": ["E"],
+    "D": ["F"],
+    "E": ["G"],
+    "F": [],
+    "G": []
+}
+
+def funct(data, first, second, final=[]):
+    final = final + [first]
+    if first == second:
+        return final
+    for i in data[first]:
+        if i not in final:
+            new_way = funct(data, i, second, final)
+            if new_way:
+                return new_way
+
+print(funct(path, "A", "E"))
