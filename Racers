@@ -1,0 +1,59 @@
+import turtle
+import time
+
+WIDTH, HEIGHT = 500, 500
+
+def get_number_ofraces():
+    racer = 0
+    while True:
+        racer = input("enter number of races (1 - 10): ")
+        if racer.isdigit():
+            racer = int(racer)
+        else:
+            print("Input is not Numeric, try again")
+            continue
+
+        if 1 <= racer <= 10:
+            return racer
+        else:
+            print("Number not in range 1-10")
+            continue
+
+def init_turtle():
+    screen = turtle.Screen()
+    screen.setup(WIDTH, HEIGHT)
+    screen.title("racers")
+
+racers = get_number_ofraces()
+init_turtle()
+
+racer = turtle.Turtle()
+
+racer.speed(1)
+racer.penup()
+racer.shape("turtle")
+racer.color('red')
+racer.forward(100)
+racer.left(90)
+racer.pendown()
+racer.forward(100)
+racer.left(90)
+racer.forward(100)
+racer.left(90)
+time.sleep(3)
+
+racer2 = turtle.Turtle()
+racer2.speed(1)
+racer2.penup()
+racer2.shape("turtle")
+racer2.color('blue')
+racer2.forward(120)
+racer2.left(90)
+racer2.pendown()
+racer2.forward(120)
+racer2.left(90)
+racer2.forward(120)
+racer2.left(90)
+time.sleep(3)
+
+turtle.done()
