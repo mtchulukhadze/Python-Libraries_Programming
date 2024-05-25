@@ -1,0 +1,42 @@
+tasks = ["t1", "t2"]
+
+def add():
+    task = input("Enter task")
+    tasks.append(task)
+
+def Del():
+    del_task = int(input("Enter, which task to Delete"))
+    if del_task < 0 or del_task > len(tasks):
+        print("Invalid Index")
+    else:
+        tasks.pop(del_task)
+
+def view():
+    print(tasks)
+
+if __name__ == "__main__":
+    """ create a loop """
+    print("Welcome to the to do List")
+    while True:
+        print("\n")
+        print("select one of them:")
+        print("--------------------------------")
+        print("1. Add a task")
+        print("2. Delete a task")
+        print("3. view a task")
+        print("4. Exit")
+        print("--------------------------------")
+
+        choice = int(input("Enter choice"))
+        if choice == 1:
+            add()
+        elif choice == 2:
+            Del()
+        elif choice == 3:
+            view()
+        elif choice == 4:
+            break
+        else:
+            print("invalid Input")
+
+print("Close the program")
