@@ -1,0 +1,13 @@
+
+import polars as pl
+
+data = {
+    "name": ["nick", "Lena"],
+    "age": [45, 67]
+}
+schema = {
+    "name": pl.Utf8,
+    "age": pl.Int8
+}
+df = pl.DataFrame(data, schema=schema)
+print(df)
