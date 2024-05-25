@@ -1,0 +1,101 @@
+
+"""
+You have a bag containing 4 red balls, 3 blue balls, and 5 green balls. What is the probability of randomly selecting a green ball from the bag
+"""
+
+red = 4
+blue = 3
+green = 5
+def probability(a, b, c):
+    ttl_balls = a + b + c
+    return c / ttl_balls
+
+print(probability(red, blue, green))
+
+"""
+A fair six-sided die is rolled. What is the probability of rolling an even number?
+"""
+
+def probability():
+    total_numbers = 6
+    evens = 0
+
+    for i in range(1, total_numbers+1):
+        if i % 2 == 0:
+            evens = evens + 1
+
+        probability = evens / total_numbers
+    return probability
+
+print(probability())
+
+"""
+An urn contains 8 white balls and 6 black balls. If one ball is drawn at random, what is the probability that it is white?
+"""
+
+white = 8
+black = 6
+def probability(a, b):
+    total = a + b
+    proba = a / total
+    return  proba
+
+print(probability(white, black))
+
+
+"""
+In a group of students, 60% are girls and 40% are boys. If 70% of the girls like pizza and 80%
+of the boys like pizza, what is the probability that a randomly chosen pizza lover is a girl?
+"""
+def PizzaLovers():
+    Girl = 0.60
+    Boy = 0.40
+    GPizza = 0.70
+    BoyPizza = 0.80
+
+    P = Girl * GPizza + Boy * BoyPizza
+
+    proba = (Girl * GPizza) / P
+    return proba
+print(PizzaLovers())
+
+"""
+In a factory, 60% of the products are good quality and 40% are defective. Among the good quality products, 95% pass the quality test,
+while among the defective products, only 20% pass the test. What is the probability that a randomly selected product passes the quality test?
+"""
+
+P_G = 0.6
+P_B = 0.4
+P_Accepted = 0.95
+P_Bed = 0.2
+def DefectiveProducts(P_G, P_B, P_Accepted, P_Bed):
+    Probability = P_G * P_Accepted + P_Bed * P_B
+    return Probability
+
+print(DefectiveProducts(P_G, P_B, P_Accepted, P_Bed))
+
+"""
+A survey indicates that 70% of people who buy a certain brand of smartphone are satisfied with it.
+If 80% of the satisfied customers would recommend the brand to others and 30% of the dissatisfied customers would also recommend it,
+what is the probability that a randomly chosen person who buys this brand of smartphone is satisfied and would recommend it?
+"""
+
+P1 = 0.7
+P2 = 0.8
+print(P1 * P2)
+
+"""
+In a certain city, 20% of the population has a particular disease. A test for this disease is 90% accurate in detecting it if a person has it,
+and 95% accurate in correctly identifying that a person does not have it. 
+If a randomly selected person tests positive, what is the probability that they actually have the disease?
+"""
+
+D = 0.2
+Not_D = 1 - 0.2
+D_Y = 0.9
+D_N = 1-0.95
+def HasDisease(D, Not_D, D_Y, D_N):
+    P = (D * D_Y) / (D * D_Y + D_N * Not_D)
+    return P
+
+print(HasDisease(D, Not_D, D_Y, D_N))
