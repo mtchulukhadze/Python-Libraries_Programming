@@ -1,0 +1,56 @@
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+
+def send_email(subject, body, user, attachment_path=None):
+    customer_name = user.get("name")
+    if not customer_name:
+        raise ValueError("not found")
+
+    sender_email = "mikheil.tchulukhadze@gmail.com"
+    sender_password = "hwtp wniq lqhd fheo"
+
+    try:
+        # Create the email
+        msg = MIMEMultipart()
+        msg['From'] = sender_email
+        msg['To'] = "mtchulukhadze@seu.edu.ge"
+        msg['Subject'] = subject
+        msg.attach(MIMEText(body, 'html'))
+
+        # Attach the file
+        if attachment_path:
+            attachment = open(attachment_path, 'rb')
+            part = MIMEBase('application', 'octet-stream')
+            part.set_payload(attachment.read())
+            encoders.encode_base64(part)
+            part.add_header('Content-Disposition', f'attachment; filename={attachment_path.split("/")[-1]}')
+            msg.attach(part)
+            attachment.close()
+
+        # Connect to the server
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+
+        # Send the email
+        server.send_message(msg)
+        server.quit()
+
+        print("sent successfully.")
+    except Exception as e:
+        raise Exception(f"Failed: {str(e)}")
+
+def get_user_email_by_username(username):
+    user_database = {
+        "mikheili.tchulukhadze@gmail.com": "mikheili.tchulukhadze@gmail.com"
+    }
+    return user_database.get(username, None)
+
+user = {"name": "mikheili.tchulukhadze@gmail.com"}
+attachment_path = "C:/Users/user/OneDrive/Desktop/email.txt"
+send_email("Test Subject", "This is a test email body.", user, attachment_path)
+
