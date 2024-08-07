@@ -1,0 +1,105 @@
+# set python path to enviroments -- system variables
+E:\AppData\Programs\Python\Python311
+E:\AppData\Programs\Python\Python311\Scripts
+
+------------------------------------------------
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\user> cd D:
+PS D:\> ls
+
+
+    Directory: D:\
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         7/27/2024   6:21 PM                C#
+d-----          3/8/2024   7:07 PM                C# installation
+d-----         7/22/2024  11:27 PM                Data
+d-----          6/5/2024  10:52 PM                Data wave
+d-----          4/9/2024   7:50 PM                DataSpell 2024.1
+d-----          2/8/2024   9:49 PM                Folder
+d-----         7/27/2024  10:03 PM                Iphone
+d-----          3/9/2024   9:14 PM                JetBrains Rider 2023.3.3
+d-----         5/23/2021   1:51 PM                mikheil
+d-----         6/16/2024   6:48 PM                New folder
+d-----         7/30/2023   2:24 PM                pepsico
+d-----          8/2/2024   2:57 PM                private
+d-----         4/28/2024   4:42 PM                PycharmProjects
+d-----         4/28/2024   4:44 PM                pythonProject3
+d-----         4/28/2024   4:44 PM                pythonProject5
+d-----         7/27/2024   9:46 PM                redmi 8
+d-----         5/27/2023   5:43 PM                xiaomi
+d-----         6/16/2024   6:49 PM                კომპრომისები
+-a----        11/22/2022  10:57 PM          16227 Export Prices and GM.xlsx
+-a----         4/11/2024  12:13 AM           1846 Mause Hand Control.py
+-a----         7/30/2023   6:59 PM         227153 Python sertificate.pdf
+
+
+PS D:\> cd D:\Data
+PS D:\Data> ls
+
+
+    Directory: D:\Data
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         7/10/2024   8:55 PM                AI & ML
+d-----         4/12/2024   9:08 PM                AI Project
+d-----          8/2/2024   2:18 PM                Data Engineering
+d-----         7/27/2024   6:19 PM                FaceRecognition
+d-----         8/19/2023   6:16 PM                Jupyter
+d-----         7/27/2024   9:40 PM                ms sql
+d-----          6/3/2023  12:18 PM                mysql
+d-----         5/20/2023   6:37 PM                Power BI
+d-----        11/21/2023  11:29 PM                Python
+d-----         7/27/2024   6:20 PM                Python Programming
+d-----        11/23/2023  11:16 AM                pythonProject
+d-----         12/9/2023   8:52 PM                pythonProject1
+d-----         1/20/2024   9:09 PM                pythonProject3
+d-----         5/11/2024  10:58 AM                Python_CS
+d-----          7/8/2024  11:11 PM                SQL_CS
+d-----         2/11/2024   8:33 PM                Statistics
+-a----        12/15/2022  10:10 PM         120214 athlete_events.csv
+-a----        12/23/2022  11:20 PM           9224 Data 2022.xlsx
+-a----         2/12/2023   1:31 AM         366734 Data analysis project.pbix
+-a----          1/8/2023   8:16 PM           1552 data.csv
+-a----         12/3/2022   7:42 PM           2149 datatest.csv
+-a----          2/4/2023   7:41 PM        2778119 Global Market sales Analysis.pbix
+-a----        12/23/2022  11:10 PM           1976 India GDP 1960-2022.csv
+-a----         7/30/2023   6:59 PM         227153 Python sertificate.pdf
+-a----        12/17/2022   5:42 PM        1098058 Regional Sales Sample.pbix
+-a----         12/3/2022   7:28 PM           2149 SampleData.csv
+-a----         12/3/2022   2:47 PM             72 SQL_N.csv
+-a----         12/3/2022   2:45 PM           9006 SQL_Trick.xlsx
+-a----        12/17/2022   2:11 PM           2149 tests database.csv
+-a----        12/17/2022   2:11 PM          11707 tests database.xlsx
+-a----         1/27/2023   3:25 PM         427038 what if parameter.pbix
+-a----         1/31/2023  12:40 AM          51351 whats if.pbix
+
+
+PS D:\Data> cd D:\Data\pythonProject1
+PS D:\Data\pythonProject1> python patterns.py
+*
+* *
+* * *
+* * * *
+* * * * *
+* * * *
+* * *
+* *
+*
+
+*****
+****
+***
+**
+*
+
+PS D:\Data\pythonProject1>
