@@ -1,0 +1,243 @@
+
+# Class Method
+
+from math import pi
+
+class Circle:
+
+    def __init__(self, radius = 1): # can be changed parameter with this r = Circle(5)
+        self.radius = radius
+
+    def __str__(self):
+        return f"Circle with radius: {self.radius}"
+
+    def Area(self):
+        return self.radius * self.radius * pi
+   
+
+r = Circle()
+print(r.__init__)
+print(r.Area())
+
+
+# Class Method with Decorator
+
+class MyClass:
+    @classmethod
+    def hi(self, name):
+        print(self)
+        print(self.__name__)
+        print(name)
+
+cl = MyClass
+print(cl.hi("mikheil"))
+
+# static method don't use self parameter
+
+class MyClass2:
+    @staticmethod
+    def hi(name):
+        print(name)
+
+cl = MyClass2()
+print(cl.hi("m"))
+
+# create subclass and get data from first class to current class
+
+class Cylinder(Circle):
+    def __init__(self, radius = 1, height = 2):
+        super.__init__(radius)
+        self.height = height
+        self.radius = radius
+
+    def __str__(self):
+        return format(self.radius)
+    
+    def get_volume(self):
+        return self.Area() * self.height
+    
+Cyl = Cylinder()
+print(Cyl.get_volume())
+
+
+# when class is used in other class, parameter should come with it
+
+class Cube(Circle):
+    def __init__(self, radius = 1, height = 2, width = 2):
+        super().__init__(radius)
+        self.height = height
+        self.width = width
+
+    def CalculateCube(self):
+        return self.Area() * self.height * self.width
+    
+
+c = Cube()
+print(c.CalculateCube())
+
+
+# multiple inheritance
+
+class Student:
+    def __init__(self, ids, name):
+        self.ids = ids
+        self.name = name
+
+    def studentData(self): 
+        print(self.name)
+        # print(self.ids)
+
+
+class Marks:
+    def __init__(self, m1, m2):
+        self.m1 = m1
+        self.m2 = m2
+
+    def mark(self):
+        ttl = self.m1 + self.m2
+        return ttl
+
+    
+class Results(Student, Marks):
+    def __init__(self, ids=None, name=None, m1=None, m2=None):
+        Student.__init__(self, ids, name)
+        Marks.__init__(self, m1, m2)
+
+    def Ttl(self):
+        self.total = self.m1 + self.m2
+
+        return self.total, self.name
+    
+    def Data(self):
+        return self.studentData()
+    
+
+r = Results(5, "m", 5, 6)
+
+print(r.Ttl())
+print(r.Data())
+
+
+# hierarchial inheritance
+
+class One:
+    def display(self):
+        self.x = 100
+        self.y = 200
+        print(f"value of x is: {self.x}")
+        print(f"value of y is: {self.y}")
+
+class Two(One):
+    def add(self):
+        print(self.x + self.y)
+    
+class three(One):
+    def multiple(self):
+        return self.x * self.y
+
+
+t = One()
+t1 = three()
+t2 = Two()
+t2.display()
+
+t1.display()
+print(t1.multiple())
+print(t2.add())
+
+# polymorphism
+
+class Overload:
+    def sum(self, a, b, c=0):
+        s = a + b + c
+        return s
+    
+o = Overload()
+print('sum is:', o.sum(5, 6))
+print('sum is:', o.sum(5, 7, 6))
+
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def displayData(self):
+        print("parent class")
+        print(self.name)
+        print(self.age)
+
+    
+class Employee(Person):
+    def __init__(self, name, age, id):
+        super().__init__(name, age)
+        self.id = id
+
+    def displayData(self):
+        print("child class")
+        print(self.name)
+        print(self.age)
+        print(self.id)
+
+p = Person("mikheil", 26) 
+print(p.displayData())
+
+emp = Employee("mikheil", 26, '4')
+print(emp.displayData())
+
+
+# __add__
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, add):
+        return self.x + add.x, self.y + add.y
+    
+
+p = Point(2, 5)
+p1 = Point(4, 6)
+print(p + p1)
+
+# lists
+
+class lists:
+    def __init__(self):
+        self.items = []
+
+    def __str__(self):
+        return ' '.join(str[i] for i in self.items)
+    
+    def isEmpty(self):
+        return self.items == []
+    
+    def push(self, item):
+        self.item = item
+        self.items.append(self.item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def peek(self):
+        return len(self.items)
+    
+    def lastone(self):
+        return self.items[len(self.items) - 1]
+    
+    def allitems(self):
+        return self.items
+    
+lst = lists()
+lst.push('x')
+lst.push('y')
+print(lst.isEmpty())
+print(lst.allitems())
+print(lst.peek())
+print(lst.lastone())
+
+for item in lst.allitems():
+    print(item)
+
+
