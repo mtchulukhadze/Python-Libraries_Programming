@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Discount Products</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>Discount Products</h1>
+
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Link</th>
+    </tr>
+
+    {% for product in products %}
+    <tr>
+        <td>{{ product.product_name }}</td>
+        <td>{{ product.price }}</td>
+        <td>
+            <a href="{{ product.url }}" target="_blank">
+                View Product
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
